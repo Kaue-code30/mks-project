@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { ContentProduct } from "../Card";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cartGif from "@/assets/cart.svg";
 
 interface CartParams {
@@ -25,7 +25,11 @@ export default function CartProduct({
       updateCartItems(content.length);
     }
   };
-   const calcularTotalCarrinho = () => {
+
+  useEffect(() => {
+    calcularTotalCarrinho();
+  }, []);
+  const calcularTotalCarrinho = () => {
     let total = 0;
     contentProductsList.forEach((product) => {
       total += parseFloat(product.price.toString());
