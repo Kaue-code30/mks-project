@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-$primary-color: #0f52ba;
+$primary-color: #009881;
 $secondary-color: #000;
 $third-color: #fff;
 
@@ -33,6 +33,11 @@ section {
   box-shadow: 0px 2px 8px 0px #00000022;
 }
 
-button{
+.Cart {
+  background-color: $primary-color;
+  box-shadow: -5px 0px 6px 0px #00000021;
+}
+
+button {
   background-color: $primary-color;
 }

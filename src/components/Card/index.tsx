@@ -1,6 +1,6 @@
 import Image from "next/image";
 import shopBag from "@/assets/shopping-bag.svg";
-import { useState } from "react";
+import { motion } from "framer-motion";
 
 export interface ContentProduct {
   id: number;
@@ -19,10 +19,12 @@ export default function Card({
   price,
   photo,
   updateCart,
-}: ContentProduct & { updateCart: () => void }) {
+  onProductClick,
+}: ContentProduct & { updateCart: () => void; onProductClick: () => void }) {
   let priceFormatted = parseInt(price.toString());
 
   const handleProductClick = () => {
+    onProductClick();
     updateCart();
   };
 
@@ -49,19 +51,22 @@ export default function Card({
           </div>
           <p className="text-xs text-[#2C2C2C]">{description}</p>
         </div>
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ duration: 0.1 }}
           onClick={handleProductClick}
-          className="w-full rounded-b-lg uppercase h-10 text-white flex items-center hover:opacity-60 transition justify-center gap-2"
+          className="w-full rounded-b-lg uppercase h-10 text-white flex items-center transition justify-center gap-2"
         >
           <Image
-            className="w-5"
+            className="w-4"
             src={shopBag}
             alt="Shopping image"
             width={100}
             height={100}
           />
           comprar
-        </button>
+        </motion.button>
       </div>
     </div>
   );

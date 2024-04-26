@@ -11,9 +11,13 @@ interface ParamsApi {
 
 interface ListProductsProps {
   updateCart: () => void;
+  onProductClick: (content: ContentProduct) => void;
 }
 
-export default function ListProducts({ updateCart }: ListProductsProps) {
+export default function ListProducts({
+  updateCart,
+  onProductClick,
+}: ListProductsProps) {
   const [listProducts, setProducts] = useState([]);
 
   const getListProducts = ({ page, rows, sortBy, orderBy }: ParamsApi) => {
@@ -116,22 +120,21 @@ export default function ListProducts({ updateCart }: ListProductsProps) {
               <span className="sr-only">Loading...</span>
             </div>
           </>
-            
-          ): (
-            listProducts.map((data: ContentProduct) => (
-              <Card
-                id={data.id}
-                name={data.name}
-                brand={data.brand}
-                description={data.description}
-                price={data.price}
-                key={data.id}
-                photo={data.photo}
-                updateCart={updateCart}
-              />
-            ))
-          )}
-        
+        ) : (
+          listProducts.map((data: ContentProduct) => (
+            <Card
+              id={data.id}
+              name={data.name}
+              brand={data.brand}
+              description={data.description}
+              price={data.price}
+              key={data.id}
+              photo={data.photo}
+              updateCart={updateCart}
+              onProductClick={() => onProductClick(data)} 
+            />
+          ))
+        )}
       </div>
     </section>
   );
